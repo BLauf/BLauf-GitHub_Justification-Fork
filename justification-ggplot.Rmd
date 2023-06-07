@@ -1,0 +1,47 @@
+---
+title: "justification-ggplot"
+author: "Nir Ben Laufer"
+date: '2023-06-07'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(ggplot2)
+library(ggrepel)  #alternate geometry
+library(ggalt)  #alternate geometry
+
+```
+
+
+```{r}
+# data
+data <- data.frame(
+  x = 1:10,  # aesthetic - x-axis variable
+  y = runif(10),  # aesthetic - y-axis variable
+  group = rep(c("A", "B"), each = 5)  # aesthetic - color grouping variable
+)
+```
+
+```{r}
+
+# scatterplot
+ggplot(data, aes(x = x, y = y, color = group)) +  # aesthetics
+  
+  geom_encircle(aes(fill = group), s_shape = 0.5) +  # geometry: encricles points using ggalt package
+  geom_text_repel(aes(label = group), fontface = "bold") +  # geometry: text labels outside points using ggrepel package
+  
+  scale_color_manual(values = c("red", "blue")) +  # scales 
+  scale_fill_manual(values = c("transparent", "transparent")) +  # scales 
+  
+  labs(
+    x = "X-axis",  # axis label
+    y = "Y-axis",  # axis label
+    color = "Group"  # legend label
+  ) +
+  
+  theme_minimal()
+
+```
+
+```
