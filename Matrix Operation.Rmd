@@ -1,0 +1,88 @@
+---
+title: "Matrix Operations"
+author: "Nir Ben Laufer"
+date: '2023-05-16'
+output: html_document
+---
+
+
+(X\^t \* X)\^-1
+
+-   QR Decomposition
+
+    A (nxp) = Q (nxn) \* R (nxp)
+
+    A\^-1 = (QR)\^-1
+
+    A \~ Q1R1 where Q1, R1 getting rid of redudant dimensions b/c the first couple terms are the most significant (STAT419)
+
+    A \~ (Q1R1)\^-1
+
+    (Q1R1)\^-1 \* A \~ I (identiy matrix)
+
+    B = (X\^t \* X)\^-1 \* X\^T \* Y (X\^t \* X)\^-1 -\> QR - \> Q1R1
+
+    B \~ (Q1R1)\^-1 \* X\^T \* Y
+
+-   Goal
+
+    LSE (least square estimate) -\> min sum(i=1 to n) (yi \* yi\^)2
+
+    Want Beta where derivative = 0 of Sq Error function to find min (Only doign one beta at a time)
+
+    derivative sum(i=1 to n) (yi \* yi\^)2 -\> sum(i=1 to n) 2 (yi 9 Bxi\^) \* -xi
+
+    -   Steps
+
+        1)  Choose starting B -\> Start at B=0 -\> Can you be more clever?
+
+        2)  Find slope at B -\> negative slope = increase -\> positive slope = decrease -\> slope \~ 0 = stop got right data This means finding the derivative at ever Beta val
+
+        3)  Update Slope -\> new B = old B - slope\*(eta) -\> Where you choose eta
+
+        4)  Repeat -\> until you hit stopping condition
+
+    -   Ways the steps could turn out
+
+    -   Slowly make it to the stopping point (0)
+
+    -   Keep overshooting a little at a time till you get to 0
+
+    -   Keep overshooting by too much until you never get to 0
+
+-   For this week write a function that keeps interating till you get to 0
+
+    -   Advice
+
+        1)  Build in a "failsafe" -\> Stop after \# of interactions -\> stop after time passes
+        2)  Build "checks" as you go -\> B1=1 -\> B2=-10 ...
+        3)  Get clever about initial B or about Eta MAE = sum \| yi - yi\^ \|
+
+        Standardize all your predictors X and update unit test set.seed()
+        
+```{r, echo = FALSE}
+
+
+print("no code shown in knit (echo = FALSE)")
+
+
+```
+
+```{r, warning = FALSE}
+
+# Define a custom function
+math_function <- function(x) {
+  if (x < 0) {
+    warning("Input value should be non-negative!")
+  }
+  return(x^2)
+}
+
+# Call the function with a negative input
+result <- math_function(-5)
+
+# Output the result
+print("entered result <- math_function(-5) which should give error, but used warning = FALSE in R chunk")
+print(result)
+
+```
