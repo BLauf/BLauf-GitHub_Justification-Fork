@@ -1,0 +1,214 @@
+---
+title: "Lab_8"
+author: "Nir Ben Laufer"
+date: "2023-06-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(viridis)
+library(animation)
+library(dplyr)
+library(ggplot2)
+library(dplyr)
+
+```
+
+# The "Gened-Thinga-Mobob"
+# Before the great creators of art studio. The way of the art was done by hand. Each stroke precesily done with a plan ahead. For many that was the standard. With the rise of technology, a new style of art has been made. "Generated art". With this art comes the benefits of unbiased designs. The "Gened-Thinga-Mobob" might not be the first of its kind, but it is highly respected within the household it was created. With each frame completely changing the design into a pattern that is unknown. The user can either see the end result or the GIF in which you can see how the end result is converged. By setting the number of frames to 15 we see the perfect line between chaotic and stable generation. Additionally, we can get out number of pixels. The defaul in pixel count is 1000x1000 on the canvas. The number choosen best spoke out in being able to capture the detail for the user.
+
+```{r}
+
+pixels <- 1000
+
+# make empty canvas
+canvas <- matrix(0, nrow = pixels, ncol = pixels)
+
+
+#Reproducibility
+set.seed(431) 
+
+# makes random lines 
+#starting coords - (x1,y1)
+#finishing coords - (x2,y2)
+lines <- data.frame(
+  x1 = runif(pixels, 1, pixels),
+  y1 = runif(pixels, 1, pixels),
+  x2 = runif(pixels, 1, pixels),
+  y2 = runif(pixels, 1, pixels),
+  color = sample(viridis::viridis(pixels), pixels, replace = TRUE)
+)
+
+# number frames wanted
+nframes <- 15
+
+# empty vector to store intermediate states of lines
+intermediate_states <- vector("list", length = nframes)
+
+for (i in 1:nframes) {
+  
+  # Animation progress
+  progress <- (i - 1) / (nframes - 1)
+  
+  # Updates x1,y1 with original x's and y's this creates change in drawing each frame
+  intermediate_lines <- lines %>% 
+    mutate(
+      x1 = x1 + progress * (x2 - x1),
+      y1 = y1 + progress * (y2 - y1)
+    )
+  intermediate_states[[i]] <- intermediate_lines
+}
+
+
+# Save animation as a GIF
+saveGIF({
+  for (i in 1:nframes) {
+    
+    
+    state <- intermediate_states[[i]]
+    
+    # Draws corresponding state
+    for (j in 1:nrow(state)) {
+      x1 <- round(state$x1[j])
+      y1 <- round(state$y1[j])
+      x2 <- round(state$x2[j])
+      y2 <- round(state$y2[j])
+      color <- state$color[j]
+      canvas[x1:x2, y1:y2] <- col2rgb(color, alpha = TRUE)[1]
+    }
+    
+    # Display current frame
+    image(canvas, axes = FALSE, col = viridis::viridis(256))
+  }
+  # Export gif
+}, movie.name = "cool_animation.gif", interval = 0.1, ani.width = 500, ani.height = 500)
+
+
+# Prints final frame
+state <- intermediate_states[[nframes]]
+for (j in 1:nrow(state)) {
+  x1 <- round(state$x1[j])
+  y1 <- round(state$y1[j])
+  x2 <- round(state$x2[j])
+  y2 <- round(state$y2[j])
+  color <- state$color[j]
+  canvas[x1:x2, y1:y2] <- col2rgb(color, alpha = TRUE)[1]
+}
+image(canvas, axes = FALSE, col = viridis::viridis(256))
+
+```
+
+
+# The " Not So Ordianry Plotting Functions on Data (but still pretty ordinary)"
+# Appreviation - "NSOPFON"
+# The NSOPFON is a cutting edge technology in which we see that way of polar graphs. One of the most common datasets in R (mtcars) is a co-collobator of this art. The use of an amazing function that turns a table full of numbers that make no sense into "Polar Art". Although this work of art tells us absolutely nothing about the dataset used, we sure can enjoy the beauty. Choosing each mtcars sample to be 100 gives us the equality of randomnes in all our geom_segments and geom_points. Also the size scalling between the segments from 1 to 1/5 to 1/20 of the scale gives us the scalar change between sizes creating an optical illusion of infinitely occuring lines.
+
+```{r}
+
+polar_styled_plot <- function(data = NULL, palette) {
+  ggplot(
+    data = data,
+    mapping = aes(
+      x = x0,
+      y = y0,
+      xend = x1,
+      yend = y1,
+      colour = factor(shade),  # changed to factor
+      size = size
+    )) + 
+    coord_polar(clip = "off") +
+    scale_y_continuous(
+      expand = c(0, 0),
+      limits = c(0, 1), 
+      oob = scales::oob_keep
+    ) +
+    scale_x_continuous(
+      expand = c(0, 0), 
+      limits = c(0, 1), 
+      oob = scales::oob_keep
+    ) + 
+    scale_colour_manual(values = palette) +  # manual scale 
+    scale_size(range = c(0, 10)) + 
+    theme_void() + 
+    guides(
+      colour = guide_none(),
+      size = guide_none(),
+      fill = guide_none(),
+      shape = guide_none()
+    )
+}
+
+#Function taken from: 
+#https://art-from-code.netlify.app/day-1/session-1/
+#Slightly changed for discrete colors
+  
+```
+
+
+```{r}
+
+# Reproducibility
+set.seed(431)
+
+#polar function
+art <- polar_styled_plot(data = mpg, palette = sample(colors(), 5)) +
+  
+  # adds line segments to plot using samples of mpg
+  geom_segment(
+    data = mpg %>%
+      sample_n(100, replace = TRUE) %>%
+      mutate(
+        x0 = displ / max(displ),
+        y0 = hwy / max(hwy),
+        x1 = 0.3 + x0 * 0.6,
+        y1 = 0.3,
+        shade = drv,
+        size = runif(n(), 1, 10)), ) + 
+  
+  #also adds lines to plot (but lines are smaller) using samples of mpg
+  geom_segment(
+    data = mpg %>%
+      sample_n(100, replace = TRUE) %>%
+      mutate(
+        x0 = displ / max(displ),
+        y0 = hwy / max(hwy),
+        x1 = 0.3 + x0 * 0.6,
+        y1 = 0.3,
+        shade = drv,
+        size = runif(n(), 1, 10) / 5),
+    lineend = "round",
+    colour = "lightblue") +
+  
+  #also adds lines to plot (but lines are super small) using samples of mpg
+  geom_segment(
+    data = mpg %>%
+      sample_n(100, replace = TRUE) %>%
+      mutate(
+        x0 = displ / max(displ),
+        y0 = hwy / max(hwy),
+        x1 = 0.3 + x0 * 0.6,
+        y1 = 0.3,
+        shade = drv,
+        size = runif(n(), 1, 10) / 20),
+    lineend = "round",
+    colour = "#222222") +
+  
+  #adds points to the plot using samples of mpg
+  geom_point(
+    data = mpg %>%
+      sample_n(100, replace = TRUE) %>%
+      mutate(
+        x0 = displ / max(displ),
+        y0 = hwy / max(hwy),
+        x1 = 0.3 + x0 * 0.6,
+        y1 = 0.3,
+        shade = drv,
+        size = runif(n(), .5, 1)),
+    colour = "#222222")
+
+
+art
+
+
+```
