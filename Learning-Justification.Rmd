@@ -1,0 +1,287 @@
+---
+title: "Learning-Justification"
+author: "Nir Ben Laufer"
+date: '2023-06-07'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[DM-2] Data wrangling
+I can cleverly use pivoting, grouping, and joining to wrangle data.
+I can use mapping ({purrr}), applying (tapply, lapply, …), and/or iteration (for loops) to perform repeated tasks.
+
+[DM-3] Data collection
+I can use API urls to access JSON data and convert it to a data frame
+I can webscrape simple tables and information
+
+```{r}
+library(here)
+library(tidyverse)
+library(httr)
+library(jsonlite)
+library(leaflet)
+library(htmlwidgets)
+library(lubridate)
+```
+
+```{r api p1}
+ 
+capital_names <- read.table(here::here("Portfolio","Justifications","state_capitals_name.txt"),
+                       col.names = c("state", "capital"))
+
+coordinates <- read.table(here::here("Portfolio","Justifications", "state_capitals_ll.txt"),
+                          col.names = c("state", "latitude", "longitude"))
+
+state_data <- capital_names$state
+capital_data <- capital_names$capital
+
+capitals <- merge(capital_names, coordinates)
+
+root <- "https://api.g7vrd.co.uk/v1/satellite-passes"
+iss_norad_id <- 25544
+
+api_url <- function(latitude, longitude) {
+  paste0(root, "/", iss_norad_id, "/", latitude, "/", longitude, ".json",
+         "?minelevation=20&hours=72")
+}
+
+
+capitals$api <- api_url(capitals$latitude, capitals$longitude)
+
+```
+
+```{r api p2}
+
+measurements <- function(url) {
+  res <- GET(url)
+  data <- fromJSON(rawToChar(res$content))
+  selected_vars <- data$passes[c(
+                                 "max_elevation",
+                                 "aos_azimuth",
+                                 "los_azimuth")]
+  return(selected_vars)
+}
+
+
+
+coordinates <- function(url) {
+  res <- GET(url)
+  data <- fromJSON(rawToChar(res$content))
+  selected_vars <- data[c("lat",
+                          "lon")]
+  return(selected_vars)
+}
+
+
+
+api_info_data <- function(url) {
+  
+  info <- measurements(url)
+  coordinates <- coordinates(url)
+  combined <- cbind(info, coordinates)
+    
+  
+  return(combined)
+}
+
+
+
+api_info_average <- function(url) {
+  
+  info <- averages(url)
+  coordinates <- coordinates(url)
+  combined <- cbind(info, coordinates)
+    
+  
+  return(combined)
+}
+
+
+
+averages <- function(url){
+  data <- measurements(url) %>%
+    summarise(mean_elevation = mean(max_elevation),
+              mean_aos_azimuth = mean(aos_azimuth),
+              mean_los_azimuth = mean(los_azimuth))
+}
+
+
+```
+
+```{r}
+
+choose_max_average <- function(variable){
+  
+  api_average_data <- lapply(capitals$api,
+                      api_info_average)
+  
+  combined_data <- do.call(rbind,
+                         api_average_data)
+  
+  max_variable_name <- paste0("max_", deparse(substitute(variable)))
+  
+  filtered_data <- combined_data %>%
+    mutate(state = state_data,
+           capital = capital_data,
+           {{ max_variable_name }} := max({{ variable }})) %>%
+      filter({{ variable }} == max({{ variable }})) %>%
+    select(lat, lon, state, capital, {{ max_variable_name }})
+
+  filtered_data <- filtered_data %>%
+    pivot_longer(cols = {{ max_variable_name }},
+               names_to = "variable",
+               values_to = "value") %>%
+    select(variable, value, everything())
+
+}
+
+
+```
+
+```{r data manipulation}
+
+#combine lists into one dataset
+api_data <- lapply(capitals$api,
+                      api_info_data)
+
+combined_data <- do.call(rbind,
+                         api_data)
+
+
+data <- combined_data %>%
+  rename(latitude = lat,
+         longitude = lon,
+         elevation = max_elevation)
+  
+
+pivoted_data <- data %>%
+  pivot_longer(cols = c(aos_azimuth,
+                        los_azimuth,
+                        elevation),
+               names_to = "variable",
+               values_to = "value") %>%
+  group_by(variable) %>%
+  summarise(mean = mean(value),
+            sd = sd(value)) %>%
+  arrange(desc(mean))
+
+
+```
+
+```{r}
+
+library(tibble)
+
+elevation_info <- choose_max_average(mean_elevation)
+aos_azimuth_info <- choose_max_average(mean_aos_azimuth)
+los_azimuth_info <- choose_max_average(mean_los_azimuth)
+
+page1 <- bind_rows(elevation_info , aos_azimuth_info, los_azimuth_info)
+page2 <- pivoted_data
+
+# Combine the tibbles into a list
+page_together <- list(page1, page2)
+
+# Print the list of tibbles
+print(page_together)
+
+```
+
+
+
+```{r webscrape}
+#install.packages("rvest")
+#library(rvest)
+
+# assign url
+url <- read_html("https://scrapeme.live/shop")
+
+# html elements
+#li.product selects: product url, img, product name, product price
+html_products <- url %>%
+  html_elements("li.product")
+
+# selecting product url html
+a_element <- html_products %>%
+  html_element("a") 
+# selecting product image html
+img_element <- html_products %>%
+  html_element("img") 
+# selecting product name html
+h2_element <- html_products %>%
+  html_element("h2") 
+# selecting product price html
+span_element <- html_products %>%
+  html_element("span")
+
+```
+
+```{r webscrape cont.}
+
+# appending elements to list
+# rvest allows us to extract our data from a html elements with just the single operation
+urls <- html_products %>% 
+	html_element("a") %>% 
+	html_attr("href") 
+images <- html_products %>% 
+	html_element("img") %>% 
+	html_attr("src") 
+names <- html_products %>% 
+	html_element("h2") %>% 
+	html_text2() 
+prices <- html_products %>% 
+	html_element("span") %>% 
+	html_text2()
+
+#turn into dataframe
+products <- data.frame(urls,
+                       images,
+                       names,
+                       prices
+                      )
+
+
+products <- products %>%
+  mutate(prices = as.numeric(sub("£", "", prices))
+         )
+
+#from here we can analysis our data
+mean(products$prices)
+```
+
+
+
+[MO-1] Theory:
+I understand the difference between ordinary multiplication and matrix multiplication, and how to implement each in R
+I can implement and briefly explain the matrix equations for multiple linear regression and ridge regression
+
+
+[MO-2] Object structures:
+I can convert data objects into the necessary matrix structures to perform operations on them.
+I can convert results of matrix operations to convenient data analysis formats
+
+
+[AI-2] Iteration to exact convergence:
+I can write a loop that updates values until perfect convergence is reached.
+I can explain and implement k-means and hierarchical clustering.
+I can identify moments of randomness or user choice in the starting conditions.
+
+
+[AI-4] Creating an algorithm:
+I can invent and implement my own iterative algorithm.
+
+
+[CD-1] Speed and Efficiency:
+I can recognize moments of possible slowdown in my code, and use built-in functions or parallelizing to speed them up.
+I always use and design vectorized functions whenever possible.
+
+
+[CD-4] Algorithmic process:
+My loops are clean and efficient
+Proper values are calculated to update objects and/or determine stopping conditions
+I have built in checks for possible problems or extreme cases in the algorithm
+
+
