@@ -1,0 +1,197 @@
+---
+title: "exactConvergence-Justification"
+author: "Nir Ben Laufer"
+date: "2023-06-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+```
+
+
+```{r k_means}
+
+#k_means clustering by hand
+
+k_means <- function(dat, k, pca = FALSE){
+    
+    # Filters numeric variables
+    vars_numeric <- sapply(dat, is.numeric)
+    data_numeric <- dat[, vars_numeric]
+    
+    #converts data to matrix
+    data_matrix <- data_numeric %>%
+        as.matrix()
+
+    
+    # pca if true
+    if (pca) {
+        # takes only first two columns
+        # number of predictors wanted for princomp 
+        data_pca <- princomp(data_numeric[, 1:2])
+        
+        #makes dataframe with two cols: PC1 and PC2
+        temp_data <- predict(data_pca, newdata = data_numeric[, 1:2])
+        
+        # changes our data to change the first two variables to our predictors
+        data_numeric <- cbind(temp_data, data_numeric[, -(1:2)])
+    }
+
+    #samples k random rows from our dataset (centroid)
+    centroid <- data_numeric[sample(nrow(data_numeric), k), ]
+    
+    #converts k random rows to matrix
+    centroid <- as.matrix(centroid)
+    
+    
+    #vector stores with empty values, size = nrows(data)
+    current <- rep(0,nrow(data_numeric))
+
+    #infinite loop till broken
+    while(TRUE) {
+        
+        #updates old to current from each loop
+        old <- current
+
+        #rows
+        for (i in 1:nrow(data_numeric)) {
+            
+            #vector of 0, size k
+            euclidean <- rep(0,
+                             k)
+
+            # k clusters
+            for (j in 1:k) {
+                #calculates the Euclidean distance for k clusters
+                #square root of the sum of squared differences between the corresponding elements of the observation and centroid.
+                euclidean[j] <- sqrt(
+                    rowSums((
+                        data_matrix[i, , drop = FALSE] - centroid[j, , drop = FALSE])) ** 2)
+            }
+            
+            # assigns 1:k to current[i]
+            # where 1:k would be the minimum distance found above, going through every row
+            current[i] <- which.min(euclidean)
+        }
+        
+        # not fully sure, but reduces total_ss
+        # after checks every obs. Checks if current[i] > 0. 
+        # if so makes matrix[i,] <- colMeans(data_numeric[current == i,])
+        
+        for (i in 1:k) {
+            # checks if there is atleast one obs assigned to cluster i,
+            if(sum(current == i) > 0) {
+                
+                #changes ith centroid row to mean values each variable across the obs in the cluster
+                centroid[i,] <- colMeans(data_numeric[current == i,])
+            }
+        }
+
+        # check for convergence
+        # if all the values of old = 0 then it breaks the loop
+        if(all(old == current)) {
+            break
+        }
+    }
+
+    #Total_SS Calculation
+    
+    # stores total ss empty vector
+    squares <- rep(0, nrow(data_numeric))
+
+    # rows
+    for (i in 1:nrow(data_numeric)) {
+        
+        # calculates total ss
+        # rows some of sum((ith data_matrix row - centroid kth row) squared)
+        squares[i] <-
+            rowSums(
+                (data_matrix[i,,drop = FALSE] - centroid[current[i],]) ** 2)
+    }
+
+    #returns 
+    return(list(clusters = current,
+                total_ss = sum(squares)))
+}
+
+
+
+```
+
+
+
+
+```{r hierclust}
+
+#hierarchical clustering by hand
+
+hier_clust <- function(dat, k) {
+    
+    # Filters numeric variables
+    vars_numeric <- sapply(dat, is.numeric)
+    data_numeric <- dat[, vars_numeric]
+
+    #distance matrix
+    dist_matrix <- as.matrix(dist(data_numeric,
+                                  method = "euclidean"))
+
+    #splits into n clusters
+    clusters <- split(x = 1:nrow(data_numeric),
+                      f = 1:nrow(data_numeric))
+    
+    #while our number clusters is less than the parameter entered by user
+    
+    # everytime a cluster is made, length(cluster) is decreased by 1?
+    
+    # so for any datset this runs n-k times
+    while (length(clusters) > k) {
+        
+        #initialized val for min_dist. Upates everytime it goes through all the data.
+        min_dist <- Inf
+        
+        #goes through whole dataset finding the smallest dist.
+        
+        # each row
+        for (i in 1:(length(clusters)-1)) {
+            
+            #each col within each row
+            for (j in (i + 1):length(clusters)){
+                
+                # gets distance between two clusters. 
+                dist_ij <- mean(dist_matrix[clusters[[i]], clusters[[j]]])
+                
+                # conditional
+                if (dist_ij < min_dist) {
+                    
+                    # updates new min_dist
+                    min_dist <- dist_ij
+                    #store the coordinates of that point (i, j)
+                    min_clusters <- c(i, j)
+                }
+            }
+        }
+
+        # stores smallest distance.
+        # why does it store the coords in the cluster row #?
+        # how does it know to move to the next line when storing?
+        # merges clusters with min dist
+        
+        clusters[[min_clusters[1]]] <- c(clusters[[min_clusters[1]]],
+                                         clusters[[min_clusters[2]]])
+        
+        clusters <- clusters[-min_clusters[2]]
+        #reduces total # clusters by 1
+    }
+
+
+    return(clusters)
+
+}
+
+
+```
+
+
