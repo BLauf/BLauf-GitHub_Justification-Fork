@@ -1,0 +1,95 @@
+---
+title: "Matrix Theory"
+author: "Nir Ben Laufer"
+date: "2023-06-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+```{r reg multiplication}
+
+
+# data
+dataset <- data.frame(A = c(1, 2, 3), B = c(4, 5, 6))
+
+# multiplies cols A and B
+result <- dataset$A * dataset$B
+
+print(result)
+
+
+```
+
+
+```{r matrix multiplication}
+
+# data
+dataset <- data.frame(A = c(1, 2, 3), B = c(4, 5, 6))
+
+# Convert to matrix
+matrix_dataset <- as.matrix(dataset)
+
+# make another matrix
+matrix2 <- matrix(c(2, 1), nrow = 2, ncol = 1)
+
+# matrix multiplication
+result <- matrix_dataset %*% matrix2
+
+#inverse 
+solve(matrix_dataset)
+
+print(result)
+
+
+```
+
+```{r inverse}
+# regular method
+
+# data
+df <- data.frame(
+  A = c(5, 2, 3),
+  B = c(14, 5, 6),
+  C = c(7, 15, 9)
+)
+
+# det by hand
+det_value <- df$A[1] * (df$B[2] * df$C[3] - df$B[3] * df$C[2]) -
+            df$A[2] * (df$B[1] * df$C[3] - df$B[3] * df$C[1]) +
+            df$A[3] * (df$B[1] * df$C[2] - df$B[2] * df$C[1])
+
+# Check if the determinant is zero
+if (det_value == 0) {
+  print("The matrix is singular and does not have an inverse.")
+} else {
+  # Calculate the cofactor matrix
+  cofactor_matrix <- data.frame(
+    A = c(df$B[2] * df$C[3] - df$B[3] * df$C[2], -(df$A[2] * df$C[3] - df$A[3] * df$C[2]), df$A[2] * df$B[3] - df$A[3] * df$B[2]),
+    B = c(-(df$B[1] * df$C[3] - df$B[3] * df$C[1]), df$A[1] * df$C[3] - df$A[3] * df$C[1], -(df$A[1] * df$B[3] - df$A[3] * df$B[1])),
+    C = c(df$B[1] * df$C[2] - df$B[2] * df$C[1], -(df$A[1] * df$C[2] - df$A[2] * df$C[1]), df$A[1] * df$B[2] - df$A[2] * df$B[1])
+  )
+  
+  # Transpose the cofactor matrix
+  adjugate_matrix <- t(cofactor_matrix)
+  
+  # Divide the adjugate matrix by the determinant
+  inverse_matrix <- adjugate_matrix / det_value
+  
+  print(inverse_matrix)
+}
+
+
+
+
+
+#matrix
+data <- data.frame(A = c(5, 2, 3), B = c(14, 5, 6), C = c(7, 15, 9))
+solve(data)
+
+
+#used chat GPT
+```
