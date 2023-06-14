@@ -1,0 +1,1004 @@
+---
+title: "Stat 431 Final Portfolio"
+format: pdf
+editor: visual
+self-contained: true
+toc: true
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+portfolio_levels <- tibble()
+names(portfolio_levels) <- c("Objective", "Level")
+```
+
+# Independent Learning (IL):
+
+*These objectives show your ability to seek out new information and adapt to new tools to solve data analysis problems.*
+
+------------------------------------------------------------------------
+
+## \[IL-1\] Adding new skills:
+
+-   I can find and adopt new packages to accomplish tasks.
+-   I can adapt to different syntax styles (tidy, base, formula style, data.table).
+-   I can use tutorials, etc. to enhance my understanding of new concepts
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "IL-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can find and adopt new packages to accomplish tasks.
+    -   incorporated boot package into lab 1:
+
+        -   https://github.com/josh-rowe/lab-1-review/commit/4d650cda5c7ff8f5d98b69557caff2ba26d80571
+-   I can adapt to different syntax styles (tidy, base, formula style, data.table).
+    -   used Base to read in lab 1 dataset:
+
+        -   https://github.com/josh-rowe/lab-1-review/commit/ddb00f1e729ecbfa1d711a0481c841f00ce055f7?diff=unified
+
+    -   used tidy to read in lab 2 dataset as well as cleaning it up:
+
+        -   https://github.com/BLauf/lab-2-visualization-fork-BLauf/commit/ebc897fb170f61fbdd8c1ad5ba246955b86cbdaf
+-   I can use tutorials, etc. to enhance my understanding of new concepts
+    -   used boot package tutorial to incorporate package
+
+        -   https://cran.r-project.org/web/packages/bootstrap/bootstrap.pdf
+
+------------------------------------------------------------------------
+
+## \[IL-2\] Online resources:
+
+-   I can use online resources (Google, ChatGPT, StackOverflow) to solve problems, debug, or find new tools.
+-   I can find source code for similar projects to use as starting points for my own
+-   I can read the documentation of an API to figure out how to access data.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 5
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "IL-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can use online resources (Google, ChatGPT, StackOverflow) to solve problems, debug, or find new tools.
+    -   Refrenced StackOverflow as well as Chat GPT several times
+
+        -   Used stackoverflow to help with apply bootstrap package to lab 1
+
+            -   https://github.com/josh-rowe/lab-1-review/commit/4d650cda5c7ff8f5d98b69557caff2ba26d80571
+
+                -   https://stackoverflow.com/questions/18238800/bootstrapping-proportions-of-categorical-variables-in-r-or-stata
+
+        -   Used Chat GPT to as the only source to my sentiment package
+
+            -   https://chat.openai.com/c/6502aecb-78f5-4569-aaa5-db9fe7ef7d70
+
+            -   https://github.com/BLauf/Sentiment-Algorithm
+-   I can find source code for similar projects to use as starting points for my own
+    -   https://github.com/josh-rowe/lab-1-review/commit/4d650cda5c7ff8f5d98b69557caff2ba26d80571
+-   I can read the documentation of an API to figure out how to access data.
+    -   Rewrote lab 3 to learn about API documentation, as well as how to correctly access all the data effectively
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+
+------------------------------------------------------------------------
+
+# Reproducible Workflow (RW):
+
+*These objectives show your ability to produce artifacts and deliverables that are organized, documented, version tracked, and responsibly designed.* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+## \[RW-1\] File, code, and data management:
+
+-   I can use Git and GitHub to track my progress and collaborate (creating repos, cloning, forking, pull requesting).
+-   I always use R Projects and the {here} package to organize my scripts, notebooks, data, and applications.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "RW-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can use Git and GitHub to track my progress and collaborate (creating repos, cloning, forking, pull requesting).
+    -   Merged a Pull request with my main repository and my forked repository.
+
+        -   https://github.com/Blauf-Practice/BLauf-GitHub_Justification/commit/ff53b94d0f3601cf6aa10bb6d33870c7324baa15
+-   I always use R Projects and the {here} package to organize my scripts, notebooks, data, and applications.
+    -   read in data to github:
+
+        -   Read my lab 4 data into github. This makes it so that when someone clones it for the first time, it will automatically put all the downloaded files in the same file path.
+
+            -   https://github.com/BLauf/lab-2-visualization-fork-BLauf/commit/c401544a0da36b9fd12954b2606d9dfcca4c7a1c
+
+    -   read in data to R using {here} package
+
+        -   used {here} package making it so that anyone would be able to download in the dataset no matter what file path or device they are using.
+
+            -   https://github.com/BLauf/lab-2-visualization-fork-BLauf/commit/d283d6ea4c6b4324510109039ef48db5f2a5dec5
+
+------------------------------------------------------------------------
+
+## \[RW-2\] Notebooks:
+
+-   I can use Quarto and/or R Markdown to produce a reproducible notebook and polished rendered document.
+-   I can use appropriate chunk options (echo, error, cache, etc.) to render my qmd/Rmd quickly and cleanly.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3 
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "RW-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+### Need to add more if I want a 4
+
+-   I can use Quarto and/or R Markdown to produce a reproducible notebook and polished rendered document.
+    -   https://github.com/Blauf-Practice/BLauf-GitHub_Justification/commit/ff53b94d0f3601cf6aa10bb6d33870c7324baa15
+-   I can use appropriate chunk options (echo, error, cache, etc.) to render my qmd/Rmd quickly and cleanly.
+    -   Used warning = FALSE to hide warning message that would normally pop up as well as echo = FALSE to make the output not show.
+
+        -   https://github.com/Blauf-Practice/BLauf-GitHub_Justification/commit/ff53b94d0f3601cf6aa10bb6d33870c7324baa15
+
+------------------------------------------------------------------------
+
+## \[RW-3\] Code style
+
+-   My code is clear, readable, well-organized, and well-commented.
+-   I can use a package-based workflow to organize my analyses
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 5
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "RW-3", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   My code is clear, readable, well-organized, and well-commented
+    -   For our Project 3, I made a function that allows the user to choose their color pattern. For this function there are comments every couple lines of code explaining what the code does as well as easy to understand variable names and coding style.
+
+        -   https://github.com/shreyaaar/VectorVerse/commit/36eaf95d5cddc9cd8513daf01720dc1e2e03cc69
+
+    -   Additionally for my k_means/hclust lab and sentiment project I also had very clear variables names and comments explaining almost every individual line with easy to understand descriptions.
+
+        -   k_means/hclust
+
+            -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+
+        -   Sentiment
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+-   I can use a package-based workflow to organize my analyses
+    -   package-based workflow for Project 3 (generative art)
+
+        -   https://github.com/shreyaaar/VectorVerse/commit/36eaf95d5cddc9cd8513daf01720dc1e2e03cc69
+
+    -   package-based workflow for my sentiment project (algorithm)
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+    -   package-based workflow for my Project 2 (world cup data)
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+
+------------------------------------------------------------------------
+
+# Technical Communication (TC):
+
+*These objectives show your ability to communicate the processes you have implemented in your code, as well as the data conclusions and results.*
+
+------------------------------------------------------------------------
+
+## \[TC-1\] Project summaries:
+
+-   I can clearly and succinctly summarize the contributions of my project.
+-   I accurately interpret statistical or modeling results.
+-   I consider the appropriate scope and impact of my project results.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "TC-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can clearly and succinctly summarize the contributions of my project.
+    -   clearly labeled what was being updated on the project 1 repository with each commit
+
+        -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commits/main?after=289be1e2043ed9effee5edb9c92e17aa3ed5b345+34&branch=main&qualified_name=refs%2Fheads%2Fmain
+
+    -   Accurately described what the hier_clust and hclust functions did for lab_7
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-7-clustering-methods-shreyaaar/commit/dfc1e6825d44c4e9bae9ef91591255f3c7b4667e
+-   I accurately interpret statistical or modeling results.
+    -   Interpreted the statistical results from the linear model made in lab_1
+
+        -   https://github.com/josh-rowe/lab-1-review/commit/ddb00f1e729ecbfa1d711a0481c841f00ce055f7
+-   I consider the appropriate scope and impact of my project results.
+
+------------------------------------------------------------------------
+
+## \[TC-2\] Documentation:
+
+-   I provide ample documentation and tutorials for my custom functions.
+-   I provide user-friendly guides for my tools and software
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "TC-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I provide ample documentation and tutorials for my custom functions.
+    -   Created documentation for project 1, giving detailed explanations about the dataset, the shiny app, and logistics of the app works. including easy to understand examples as well as specific variable names listed
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/d638433c1beba2372c22a60579aabd1599dcb0fc
+
+    -   Provided documentation for lab_7 giving a demo of the project, explaining what each function does, as well as it's parameters and outputs. Also showed example of how to use the code and explaining why you would errors if you ran it a specific way.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-7-clustering-methods-shreyaaar/commit/dfc1e6825d44c4e9bae9ef91591255f3c7b4667e
+-   I provide user-friendly guides for my tools and sofware
+    -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/d638433c1beba2372c22a60579aabd1599dcb0fc
+    -   user friendly in the app
+        -   In order to make sentence entry in my sentiment project as user-friendly as possible. I made an algorithm that auto corrects spammed letters as well as fixes accidental indents in lines.
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+------------------------------------------------------------------------
+
+# Data Manipulation (DM):
+
+*These objectives relate to the collection, cleaning, processing, and preparing of datasets for analysis.*
+
+------------------------------------------------------------------------
+
+## \[DM-1\] Data preparation:
+
+-   I can read in datasets to R, including untidy ones.
+-   I can clean datasets to deal with missing data, typos, poor formatting, etc.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "DM-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can read in datasets to R, including untidy ones. Maybe?
+    -   Separated one giant dataset that could not be read into github into 4 mini datasets and read them all into R. After that the columns titles needed to be fixed in order to analyze our dataset. Finally more data preparation was done to fix the question and results columns allowing us to make a plotly using the dataset.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-2-visualization-BLauf/commit/ebc897fb170f61fbdd8c1ad5ba246955b86cbdaf
+-   I can clean datasets to deal with missing data, typos, poor formatting, etc.
+    -   This same data had poor formatting on that needed to fixed in order to access each column
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-2-visualization-BLauf/commit/ebc897fb170f61fbdd8c1ad5ba246955b86cbdaf
+
+    -   For project 1, although I was not the primary helper in cleaning the data, I started the path and we ended up cleaning a survey of adults in the tech. In this dataset to begin, there were almost 30 different variables for gender and plenty of age entries that just made no sense.
+
+        -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commit/9643c5973e74b78c3d0710fdd2843fb05cbccdd1
+
+------------------------------------------------------------------------
+
+## \[DM-2\] Data wrangling
+
+-   I can cleverly use pivoting, grouping, and joining to wrangle data.
+-   I can use mapping ({purrr}), applying (tapply, lapply, ...), and/or iteration (for loops) to perform repeated tasks.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "DM-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can cleverly use pivoting, grouping, and joining to wrangle data.
+    -   Pivoted API data from our lab 3 to display very interesting results in a extremely easy to follow and informative data tibble. This was all done using functions such as pivoting and grouping.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+-   I can use mapping ({purrr}), applying (tapply, lapply, ...), and/or iteration (for loops) to perform repeated tasks.
+    -   Used lapply and sapply several times to make the somewhat auto word correction algorithm for my sentiment project.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+    -   Used lapply to collect data from API urls
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+
+    -   Used for loops/iterations to work on linear regressions (by gradient descent)/k_means/hclust manual functions
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/blob/master/R/linear_regression_alt.R
+
+------------------------------------------------------------------------
+
+## \[DM-3\] Data collection
+
+-   I can use API urls to access JSON data and convert it to a data frame
+-   I can webscrape simple tables and information
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "DM-3", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can use API urls to access JSON data and convert it to a data frame
+    -   Redid lab_3 and used the same API urls to create a data frame of satellite-passes
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+-   I can webscrape simple tables and information
+    -   Webscraped an online shop getting a data frame that has the url, image, name, and price all together and then finally updated the price to be a numeric variable so that analyses can be done on the dataset.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+
+------------------------------------------------------------------------
+
+# Professional Visualization (PV):
+
+------------------------------------------------------------------------
+
+## \[PV-1\] ggplot: grammar of graphics
+
+-   I can use less common geometries, including those from ggplot extension packages.
+-   I can use the correct aesthetics to map variables
+-   I understand how geometries inherit aesthetics I can add annotations to my plot
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "PV-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can use less common geometries, including those from ggplot extension packages.
+    -   Basic demo showing exactly what the geometries are in ggplot as well as some uncommon ones.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+
+    -   Used plotly in lab_2 as well as project 1 (in a shiny app) to display data. With plotly, the dataset was interactive in which you could hover over an observation and see the Specifics
+
+        -   For lab_2 in the plotly graph you were also able to remove/add the regression slope if it was getting in the way of the data
+
+            -   https://github.com/BLauf/lab-2-visualization-fork-BLauf/commit/ebc897fb170f61fbdd8c1ad5ba246955b86cbdaf
+
+        -   For project_1 you were able to remove categorical observations. For instance if you did not want to see observations from the United States in the plot, you would be able to remove that country from the list.
+
+            -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commit/be378cb4c7bae2a627060302628e2fddce137d87
+-   I can use the correct aesthetics to map variables
+    -   Basic demo showing exactly what the aesthetics are in ggplot
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+-   I understand how geometries inherit aesthetics I can add annotations to my plot
+    -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+
+------------------------------------------------------------------------
+
+## \[PV-2\] ggplot: theme
+
+-   I can edit the titles, subtitles, captions, axis labels, etc. to create a clearly labelled plot
+-   I can choose colors ("scales") and themes to make a visually pleasing and accessible plot
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "PV-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can edit the titles, subtitles, captions, axis labels, etc. to create a clearly labelled plot
+    -   A basic demonstration of editing the titles aswell as the axis labels. In addition to adding a legend to the plot.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+-   I can choose colors ("scales") and themes to make a visually pleasing and accessible plot
+    -   Properly added the scales using scale_color_manual and scale_fil_manual changing the plots colors as well as the transparency of the display.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+
+    -   Used theme_minimal in plot. This just adds a minimal theme to the background making it have a pretty basic background and minimal gridlines resulting in a very clean plot.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/085a00999235dd2bdbdad617674b076330686f12
+
+------------------------------------------------------------------------
+
+## \[PV-3\] Dynamic visualizations
+
+-   I can use a package like {gganimate} to create self-contained gifs
+-   I can use a package like {plotly}, {ggplotly}, {leaflet}, {ggirafe}, etc. to make interactable html widgets
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "PV-3", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can use a package like {gganimate} to create self-contained gifs
+    -   For lab_8 used gganimate to create an animation of each iteration of the plot. And the next change would change based on the already resulting change. This resulted in a clean animation in which you can see the final art being made. Also, the is able to change the number of frames used in this animation aswell as the number of pixels.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/ed99846086dbfb8b563e46ec58a64bd8629764b7
+-   I can use a package like {plotly}, {ggplotly}, {leaflet}, {ggirafe}, etc. to make intractable html widgets
+    -   Used plotly in lab_2 as well as project 1 (in a shiny app) to display data. With plotly, the dataset was interactive in which you could hover over an observation and see the Specifics
+
+        -   For lab_2 in the plotly graph you were also able to remove/add the regression slope if it was getting in the way of the data
+
+            -   https://github.com/BLauf/lab-2-visualization-fork-BLauf/commit/ebc897fb170f61fbdd8c1ad5ba246955b86cbdaf
+
+        -   For project_1 you were able to remove categorical observations. For instance if you did not want to see observations from the United States in the plot, you would be able to remove that country from the list.
+
+            -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commit/be378cb4c7bae2a627060302628e2fddce137d87
+
+    -   Used leaflet in project 2. I made a leaflet plot that showed the world map with each stadium that was played in the finals of the world cup as a marker. To add on, I added a flag for the winning team as well as the stadium attendance, stadium name, and year the game as played.
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+
+------------------------------------------------------------------------
+
+## \[PV-4\] Shiny
+
+-   I can create a functional Shiny app.
+-   I understand the principle of reactivity, and how to use it.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "PV-4", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can create a functional Shiny app.
+    -   I created a shiny app using the adults employed in tech mental health survey dataset. In the app there are multiple pages and the user has plenty of interaction options to filter data and choose what type of plot they want.
+
+        -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commit/dcd7616d94a7ef050dc34960e0b8606523cede19
+-   I understand the principle of reactivity, and how to use it.
+    -   within the shiny app. I used reactive() to calculate the frequency percentages that would update based on the user input on filtering data.
+
+        -   https://github.com/BLauf/Project-1-Interactive-Data-Exploration-Master/commit/9a46eae68044f802a0426f52964adf86553448bb
+
+------------------------------------------------------------------------
+
+# Software Development (SD):
+
+*These objectives relate to your ability to develop correct, usable, well-designed, and sophisticated software in the R language.*
+
+------------------------------------------------------------------------
+
+## \[SD-1\] R programming language details
+
+-   I understand non-standard evaluation (aka "Tidy Eval" or "unquoted objects"), and I can use tunneling in my functions.
+-   I understand functional programming, and I can use functions as objects in my code design
+-   I understand object-oriented programming, and I can define my own classes and methods.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 2
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "SD-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I understand non-standard evaluation (aka "Tidy Eval" or "unquoted objects"), and I can use tunneling in my functions.
+    -   Using double brackets I understand and know how to use unquoted objects that are passed through the function until called. Once called it will do the function and then the "present" which is the {{string}} is opened once called and the object that was past through will not be used as a string.
+-   I understand functional programming, and I can use functions as objects in my code design
+    -   In my sentiment package, I also consistently switch between sentence structures and a vector of strings. This makes applying each word a lot easier in the check_spelling functions.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+    -   In my project 2, I move have two helper functions that go from passing a country name (string) to passing a country code (string) to returning an emoji of that country flag.
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+-   I understand object-oriented programming, and I can define my own classes and methods
+    -   In my project 2, I move have two helper functions that go from passing a country name (string) to passing a country code (string) to returning an emoji of that country flag.
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+
+------------------------------------------------------------------------
+
+## \[SD-2\] Package creation:
+
+-   I can create a folder that is installable as an R package, possibly using {usethis} helper functions
+-   I can document my functions using {roxygen2} style commenting
+-   I can write and run unit tests using {testthat}
+-   I can design a package that is user-friendly and has well-designed functions.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 4
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "SD-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can create a folder that is installable as an R package, possibly using {usethis} helper functions
+    -   used use::this to create my sentiment package and then linked it to github after.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/709ce8b936cdfa8b499b7c9536c826ac60cd0388
+
+    -   used the R git tab shell to manually create the package style for my project 2 and then link it to github
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/9e201b1643ced6689d79f0d13ed51f43acd25864
+-   I can document my functions using {roxygen2} style commenting
+    -   Documented my project 2 using roxygen2. in which all the imports,exports are done automatically using devtools::document() or ctrl+shift+d
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/9e201b1643ced6689d79f0d13ed51f43acd25864
+
+    -   Documented my sentiment package
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/709ce8b936cdfa8b499b7c9536c826ac60cd0388
+-   I can write and run unit tests using {testthat}
+    -   Ran tests for my project 2 output of the data filtering functions
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/688c30a31ca2f7b599f9bf3b47c121692846b3fb
+-   I can design a package that is user-friendly and has well-designed functions.
+    -   In order to make sentence entry in my sentiment project as user-friendly as possible. I made a whole algorithm that auto corrects spammed letters as well as fixes accidental indents in lines. This makes it so that no matter what words the user inputs the function will correctly run no matter the format and return no errors.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+    -   Made well-designed functions in order to correctly output country flags in the leaflet markers.
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+
+------------------------------------------------------------------------
+
+# Matrix Operations (MO):
+
+*These objectives show your ability to manipulate data-related information in the form of vectors and matrices, rather than in high-level data structures.*
+
+------------------------------------------------------------------------
+
+## \[MO-1\] Theory:
+
+-   I understand the difference between ordinary multiplication and matrix multiplication, and how to implement each in R
+-   I can implement and briefly explain the matrix equations for multiple linear regression and ridge regression
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "MO-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I understand the difference between ordinary multiplication and matrix multiplication, and how to implement each in R
+
+    -   using both ordinary and matrix multiplication. Showing how to find the inverse of a 3x3 using both methods
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/410633b40450afdf25240ffe155450d9e4ba8f9b
+
+-   I can implement and briefly explain the matrix equations for multiple linear regression and ridge regression
+
+    -   Linear Regression done by gradient descent in lab 5. In which the tests worked for everything
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+    -   Ridge Regression in lab 5. In which the tests worked for everything
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/967e906931fcd5372d0c2837374335aa7fbfa549
+
+------------------------------------------------------------------------
+
+## \[MO-2\] Object structures:
+
+-   I can convert data objects into the necessary matrix structures to perform operations on them.
+-   I can convert results of matrix operations to convenient data analysis formats
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "MO-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can convert data objects into the necessary matrix structures to perform operations on them.
+    -   In lab_5, I used matrix operations to do linear regressions so that I could perform standard operations on my data. This was primarily for the mlr_gd function that implement linear regression with many predictors by gradient descent.
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+    -   Used matrix operations to do k-means and hierarchical clustering. in this code there are super descriptive and easy-to-follow comments over almost every line of code explaining what it does as well as why we need to do it for our clustering functions.
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+-   I can convert results of matrix operations to convenient data analysis formats
+    -   In lab_5, I used matrix operations to do linear regressions so that I could perform standard operations on my data. This was primarily for the mlr_gd function that implement linear regression with many predictors by gradient descent.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+
+    -   Used matrix operations to do k-means and hierarchical clustering. in this code there are super descriptive and easy-to-follow comments over almost every line of code explaining what it does as well as why we need to do it for our clustering functions.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+
+------------------------------------------------------------------------
+
+# Algorithms and Iteration (AI):
+
+*These objectives ask you to design code-based approaches to statistical computing problems, usually involving iteration to a stopping condition.*
+
+------------------------------------------------------------------------
+
+## \[AI-1\] Iteration to approximate value:
+
+-   I can write a loop that updates values until a certain approximate stopping condition.
+-   I can explain and implement gradient descent in simple cases.
+-   I can choose reasonable starting conditions and step sizes.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 2
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "AI-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can write a loop that updates values until a certain approximate stopping condition.
+    -   loop for linear_regression_alt.R file has a max_iterations value preset before the loop begins. The value set will be the maximum iterations that the loop does.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+
+    -   Also added a derivative check so that the loop finishes early if the derivative is close enough to 0 meaning that the slope is not very far off from the actual slope. This saves a lot of time in the case that the slope is found to an accurate enough measurement before the max_iterations reached.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/58a188c810dacba6c6800561a02a84d5dc31226c
+-   I can explain and implement gradient descent in simple cases.
+    -   used gradient descent to find linear regression using any dataset.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+-   I can choose reasonable starting conditions and step sizes.
+
+------------------------------------------------------------------------
+
+## \[AI-2\] Iteration to exact convergence:
+
+-   I can write a loop that updates values until perfect convergence is reached.
+-   I can explain and implement k-means and hierarchical clustering.
+-   I can identify moments of randomness or user choice in the starting conditions.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "AI-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can write a loop that updates values until perfect convergence is reached.
+    -   Writing a loop that updates until perfect convergence involves using these clustering methods. The loop will not stop based on a "close enough value" to the actual. The loop will only stop once we find convergence. This means that every cluster is assigned and is properly calculated based on the distance method wanted.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+-   I can explain and implement k-means and hierarchical clustering.
+    -   Used matrix operations to do k-means and hierarchical clustering. in this code there are super descriptive and easy-to-follow comments over almost every line of code explaining what it does as well as why we need to do it for our clustering functions.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+-   I can identify moments of randomness or user choice in the starting conditions.
+
+------------------------------------------------------------------------
+
+## \[AI-3\] Generative art:
+
+-   I can apply a variety of generative art functions to make a visually pleasing piece.
+-   I can explain why particular changes to the code result in particular differences in the visualization.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "AI-3", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can apply a variety of generative art functions to make a visually pleasing piece.
+    -   In lab_8 I made a loop that keeps changing the origins of the lines and then uses the origins changed to change the origins and so fourth. This happens the amount of the times that the user wants to set the number of frames to it. After that, I used the viridis package to give the generative art a nice theme color and then set a seed for reproducibility. Lastly, I animated the package so that the user can see the art slowly being formed into the "final" picture,
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/ed99846086dbfb8b563e46ec58a64bd8629764b7
+-   I can explain why particular changes to the code result in particular differences in the visualization.
+
+------------------------------------------------------------------------
+
+## \[AI-4\] Creating an algorithm:
+
+-   I can invent and implement my own iterative algorithm.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 5
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "AI-4", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can invent and implement my own iterative algorithm.
+    -   word correction algorithm
+        -   I made a whole algorithm that auto corrects spammed letters as well as fixes accidental indents in lines. This makes it so that no matter what words the user inputs the function will correctly run no matter the format and return no errors.
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+    -   sentiment algorithm
+        -   I made a sentiment algorithm that takes all the words that the user inputs in the word correction algorithm and then it finds all the words that match a sentiment word list I found online using the tidytext package. From there the algorithm will calculate what the current score is updating it everytime a new word is found that has a negative/positive value. And lastly it will return a dataframe with the corrected sentence, each word that has a sentiment and it's corresponding effect (positive / negative) and lastly a iterated score showing the total sentiment value as you read the sentence and how it changes towards each word.
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/aeaa7b625fceb958234f6a1cf7ce02a0e9bb3808
+
+------------------------------------------------------------------------
+
+# Code Design (CD):
+
+*These objectives relate to making wise or clever choices in how you implement a procedure in code; including creating functions and objects, or thinking about the clarity and efficiency of processes.*
+
+------------------------------------------------------------------------
+
+## \[CD-1\] Speed and Efficiency:
+
+-   I can recognize moments of possible slowdown in my code, and use built-in functions or parallelizing to speed them up.
+-   I always use and design vectorized functions whenever possible.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 2
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "CD-1", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can recognize moments of possible slowdown in my code, and use built-in functions or parallelizing to speed them up.
+
+    -   several cases of using lapply and sapply which is significantly more efficient than for loops
+
+        -   Used lapply and sapply several times to make the somewhat auto word correction algorithm for my sentiment project.
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+        -   Used lapply to collect data from API urls
+
+            -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/5d039fe53e72fafc37f61bb4fc2f14215920c9b6
+
+-   I always use and design vectorized functions whenever possible.
+
+------------------------------------------------------------------------
+
+## \[CD-2\] Object handling:
+
+-   I can make reasonable choices in my code design about when to save intermediate objects.
+-   I can convert objects between types and structures as needed.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "CD-2", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I can make reasonable choices in my code design about when to save intermediate objects.
+    -   For my sentiment package, my code design save intermediate objects effectively in which no objects are saved unless they are fully needed throughout the whole function. Each object is made in another function or helper function making the primary function that calls all functions super simple and easy to follow.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+-   I can convert objects between types and structures as needed.
+    -   In my sentiment package, I also consistently switch between sentence structures and a vector of strings. This makes applying each word a lot easier in the check_spelling functions.
+
+        -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+    -   In my project 2, I move have two helper functions that go from passing a country name (string) to passing a country code (string) to returning an emoji of that country flag.
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+
+------------------------------------------------------------------------
+
+## \[CD-3\] Supporting functions:
+
+-   I write helper/shortcut functions to streamline repeated tasks and make my code easier to read.
+-   I use intermediate functions to streamline repeated or looping processes.
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 5
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "CD-3", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   I write helper/shortcut functions to streamline repeated tasks and make my code easier to read.
+    -   https://github.com/shreyaaar/VectorVerse/commit/36eaf95d5cddc9cd8513daf01720dc1e2e03cc69
+        -   move to code design
+    -   In my project 2, I move have two helper functions that go from passing a country name (string) to passing a country code (string) to returning an emoji of that country flag.
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+    -   word correction algorithm (helper function for sentiment package)
+        -   I made an algorithm that auto corrects spammed letters as well as fixes accidental indents in lines. This makes it so that no matter what words the user inputs the function will correctly run no matter the format and return no errors.
+
+            -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+-   I use intermediate functions to streamline repeated or looping processes.
+    -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+    -   https://github.com/BLauf/Sentiment-Algorithm/commit/ccd7d9eefcaaf1f95138f1f0c8ca4dc365598641
+
+------------------------------------------------------------------------
+
+## \[CD-4\] Algorithmic process:
+
+-   My loops are clean and efficient
+-   Proper values are calculated to update objects and/or determine stopping conditions
+-   I have built in checks for possible problems or extreme cases in the algorithm
+
+```{r, include = FALSE}
+## Fill in the line below with your self-assigned level for this objective.
+my_level <- 3
+
+portfolio_levels <- portfolio_levels %>%
+  bind_rows(c(Objective = "CD-4", 
+              Level = my_level))
+```
+
+### Level: `r my_level`
+
+### Justification
+
+-   My loops are clean and efficient
+    -   used loop is linear regression by gradient descent to slowly iterate towards approximate value.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+
+    -   used loop for k_means and hclust clustering methods for exact convergence.
+
+        -   https://github.com/BLauf/BLauf-GitHub_Justification-Fork/commit/32329613ecd8520709dc50954c64471d2da395c5
+
+    -   used loops in my project 2 to go through every stadium in my dataset to mark every point with its corresponding values and country flag
+
+        -   https://github.com/BLauf/STAT431-project-2-master/commit/875f895cd369c7de4e3a56cd203a0fd03d4f66af
+-   Proper values are calculated to update objects and/or determine stopping conditions
+    -   loop for linear_regression_alt.R file has a max_iterations check value preset before the loop begins. The value set will be the maximum iterations that the loop does.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/94edce81ecff974c15b15a8e25cad8ec9c7ad095
+
+    -   Also added a derivative check so that the loop finishes early if the derivative is close enough to 0 meaning that the slope is not very far off from the actual slope. This saves a lot of time in the case that the slope is found to an accurate enough measurement before the max_iterations reached.
+
+        -   https://github.com/Cal-Poly-Advanced-R/lab-5-regression-nberzinsCP/commit/58a188c810dacba6c6800561a02a84d5dc31226c
+-   I have built in checks for possible problems or extreme cases in the algorithm
+    -   built in checks would be the max_iterations variable making sure the loop has atleast some sort of limit in the case that convergence is not reached.
+
+------------------------------------------------------------------------
+
+# Summary
+
+```{r, echo = FALSE}
+portfolio_levels %>%
+  mutate(
+    Category = str_extract(Objective, "[A-Z]{2}"),
+    Level = factor(Level)
+  ) %>%
+  ggplot(aes(x = Level, y = (..count..)/sum(..count..))) +
+  geom_bar() +
+  labs(x = "Level",
+       y = "Percent") +
+  theme_minimal() +
+  scale_y_continuous(labels=scales::percent)
+```
